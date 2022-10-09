@@ -7,10 +7,10 @@ export class AppService {
       title: 'Nest App',
       date: new Date().toISOString(),
       status: 'UP',
-      env: process.env,
-      // process.env.debug === 'Ture'
-      //   ? process.env
-      //   : process.env.NODE_ENV || 'NA',
+      env:
+        process.env.NODE_ENV_DEBUG == 'Ture'
+          ? process.env
+          : process.env.NODE_ENV || 'NA',
     };
   }
 }
