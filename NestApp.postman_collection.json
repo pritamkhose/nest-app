@@ -144,14 +144,44 @@
 									"    pm.response.to.have.header(\"Content-Type\");",
 									"});",
 									"pm.test(\"Body matches string\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    pm.expect(pm.response.text()).to.include(\"id\", \"createdOn\", \"modifiedOn\");",
 									"    var jsonReq = JSON.parse(pm.request.body);",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonReq.name).to.eql(jsonData.name);",
-									"    pm.expect(jsonReq.age).to.eql(jsonData.age);",
-									"    pm.expect(jsonReq.breed).to.eql(jsonData.breed);",
+									"    pm.expect(jsonReq.firstName).to.eql(jsonData.firstName);",
+									"    pm.expect(jsonReq.lastName).to.eql(jsonData.lastName);",
+									"    pm.expect(jsonReq.email).to.eql(jsonData.email);",
+									"    pm.expect(jsonData.isActive).to.eql(true);",
 									"    pm.environment.set(\"user_id\", jsonData.id);",
 									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomString(minValue, maxValue, dataSet = ",
+									"    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') {",
+									"        //0123456789",
+									"    if (!minValue) {",
+									"        minValue = 10;",
+									"        maxValue = 10;",
+									"    }",
+									"",
+									"    if (!maxValue) {",
+									"        maxValue = minValue;",
+									"    }",
+									"",
+									"    let length = _.random(minValue, maxValue),",
+									"        randomString = \"\";",
+									"",
+									"    for (let i = 0; i < length; i++)",
+									"        randomString += dataSet.charAt(Math.floor(Math.random() * dataSet.length));",
+									"    return randomString;",
+									"}",
+									"",
+									"pm.variables.set('randomString', randomString());"
 								],
 								"type": "text/javascript"
 							}
@@ -162,7 +192,87 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"firstName\": \"P\",\n  \"lastName\": \"Khose\"\n}",
+							"raw": "{\n  \"firstName\": \"Prem\",\n  \"lastName\": \"Last {{randomString}}\",\n  \"email\": \"{{randomString}}@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    var jsonReq = JSON.parse(pm.request.body);",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonReq.firstName).to.eql(jsonData.firstName);",
+									"    pm.expect(jsonReq.lastName).to.eql(jsonData.lastName);",
+									"    pm.expect(jsonReq.email).to.eql(jsonData.email);",
+									"    pm.expect(jsonReq.isActive).to.eql(jsonData.isActive);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomString(minValue, maxValue, dataSet = ",
+									"    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') {",
+									"        //0123456789",
+									"    if (!minValue) {",
+									"        minValue = 10;",
+									"        maxValue = 10;",
+									"    }",
+									"",
+									"    if (!maxValue) {",
+									"        maxValue = minValue;",
+									"    }",
+									"",
+									"    let length = _.random(minValue, maxValue),",
+									"        randomString = \"\";",
+									"",
+									"    for (let i = 0; i < length; i++)",
+									"        randomString += dataSet.charAt(Math.floor(Math.random() * dataSet.length));",
+									"    return randomString;",
+									"}",
+									"",
+									"pm.variables.set('randomString', randomString());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 40,\n  \"firstName\": \"Niku\",\n  \"lastName\": \"Last{{randomString}}\",\n  \"email\": \"Last@gmail.com\",\n  \"isActive\" : false\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -249,6 +359,50 @@
 							],
 							"path": [
 								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users find",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"isActive\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/users/find",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"find"
 							]
 						}
 					},
@@ -347,12 +501,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/swagger",
+					"raw": "{{baseURL}}/docs",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"swagger"
+						"docs"
 					]
 				}
 			},
@@ -434,12 +588,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseURL}}/api/graphql",
+					"raw": "{{baseURL}}/graphql",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
-						"api",
 						"graphql"
 					]
 				}

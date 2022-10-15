@@ -5,10 +5,13 @@ import {
   Get,
   Param,
   Post,
+  Put,
   ParseIntPipe,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto } from './dto/user.post.req.dto';
+import { UpdateUserDto } from './dto/user.put.req.dto';
+import { FindUserDto } from './dto/user_find.post.req.dto';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 
@@ -19,9 +22,20 @@ export class UsersController {
 
   @Post()
   @ApiOperation({ summary: 'Create user' })
+  @ApiResponse({ status: 201, description: 'Success.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   create(@Body() createUserDto: CreateUserDto): Promise<User> {
     return this.usersService.create(createUserDto);
+  }
+
+  @Post('/find')
+  findByProp(@Body() findUserDto: FindUserDto): Promise<User[]> {
+    return this.usersService.findByProp(findUserDto);
+  }
+
+  @Put()
+  update(@Body() updateUserDto: UpdateUserDto): Promise<User> {
+    return this.usersService.save(updateUserDto);
   }
 
   @Get()

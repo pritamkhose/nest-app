@@ -1,19 +1,37 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { ApiProperty } from '@nestjs/swagger';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ApiProperty({ example: 'Pritam', description: 'The first name of the user' })
-  @Column()
+  @Column({ width: 50 })
   firstName: string;
 
-  @ApiProperty({ example: 'Khose', description: 'The last name of the user' })
-  @Column()
+  @Column({ width: 50 })
   lastName: string;
 
   @Column({ default: true })
   isActive: boolean;
+
+  @Column({ width: 100 })
+  email: string;
+
+  @CreateDateColumn({
+    nullable: false,
+    name: 'dt_create',
+  })
+  createdOn: Date;
+
+  @UpdateDateColumn({
+    nullable: false,
+    name: 'dt_modified',
+  })
+  modifiedOn: Date;
 }
