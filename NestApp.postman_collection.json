@@ -151,7 +151,7 @@
 									"    pm.expect(jsonReq.lastName).to.eql(jsonData.lastName);",
 									"    pm.expect(jsonReq.email).to.eql(jsonData.email);",
 									"    pm.expect(jsonData.isActive).to.eql(true);",
-									"    pm.environment.set(\"user_id\", jsonData.id);",
+									"    pm.environment.set(\"bird_id\", jsonData.id);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -231,10 +231,7 @@
 									"    pm.expect(pm.response.text()).to.include(\"id\");",
 									"    var jsonReq = JSON.parse(pm.request.body);",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonReq.firstName).to.eql(jsonData.firstName);",
-									"    pm.expect(jsonReq.lastName).to.eql(jsonData.lastName);",
-									"    pm.expect(jsonReq.email).to.eql(jsonData.email);",
-									"    pm.expect(jsonReq.isActive).to.eql(jsonData.isActive);",
+									"    pm.expect(jsonReq.name).to.eql(jsonData.name);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -264,18 +261,20 @@
 									"    return randomString;",
 									"}",
 									"",
-									"pm.variables.set('randomString', randomString());"
+									"pm.variables.set('randomString', randomString());",
+									"",
+									"pm.variables.set('randomNo', _.random(1, 30));"
 								],
 								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"id\": 40,\n  \"firstName\": \"Niku\",\n  \"lastName\": \"Last{{randomString}}\",\n  \"email\": \"Last@gmail.com\",\n  \"isActive\" : false\n}",
+							"raw": "{\n    \"id\": \"{{bird_id}}\",\n    \"name\": \"name {{randomString}}\",\n    \"age\": {{randomNo}},\n    \"breed\": \"breed {{randomString}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -283,12 +282,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseURL}}/Birds",
+							"raw": "{{baseURL}}/birds",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"Birds"
+								"birds"
 							]
 						}
 					},
@@ -304,7 +303,6 @@
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});",
-									"birds",
 									""
 								],
 								"type": "text/javascript"
@@ -315,13 +313,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/birds/2",
+							"raw": "{{baseURL}}/birds/{{bird_id}}",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"birds",
-								"2"
+								"{{bird_id}}"
 							],
 							"query": [
 								{
@@ -392,7 +390,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"isActive\": false\n}",
+							"raw": "{\n    \"age\": 13\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -432,13 +430,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/birds/{{user_id}}",
+							"raw": "{{baseURL}}/birds/{{bird_id}}",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"birds",
-								"{{user_id}}"
+								"{{bird_id}}"
 							],
 							"query": [
 								{
@@ -793,13 +791,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/users/2/address",
+							"raw": "{{baseURL}}/users/11/address",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"users",
-								"2",
+								"11",
 								"address"
 							],
 							"query": [
@@ -946,13 +944,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/address/2",
+							"raw": "{{baseURL}}/address/{{address_id}}",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"address",
-								"2"
+								"{{address_id}}"
 							],
 							"query": [
 								{
@@ -988,12 +986,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/users",
+							"raw": "{{baseURL}}/address",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"users"
+								"address"
 							]
 						}
 					},
@@ -1019,12 +1017,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseURL}}/users/{{address_id}}",
+							"raw": "{{baseURL}}/address/{{address_id}}",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
-								"users",
+								"address",
 								"{{address_id}}"
 							],
 							"query": [
