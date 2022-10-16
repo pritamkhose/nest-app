@@ -73,6 +73,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - [Nest Example](https://github.com/nestjs/nest/tree/master/sample)
 - [Nest Canary Example](https://github.com/vercel/next.js/tree/canary/examples)
 - [Swagger](https://docs.nestjs.com/openapi/introduction) [code] (https://github.com/nestjs/nest/tree/master/sample/11-swagger)
+- [Inject Service From Another Module in NestJS](https://blog.bitsrc.io/nest-js-inject-service-from-another-module-cf85987398d5)
 
 ## Stay in touch
 

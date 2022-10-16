@@ -35,7 +35,7 @@ import { AddressModule } from './address/address.module';
     MongooseModule.forRoot(
       process.env.MANGODB_HOST || 'mongodb://localhost:27017/nestapp',
     ),
-    // BirdsModule,
+    BirdsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
