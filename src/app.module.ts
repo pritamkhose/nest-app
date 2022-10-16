@@ -1,11 +1,14 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-import { UsersModule } from './users/users.module';
-import { CatsModule } from './cats/cats.module';
+import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+
+import { BirdsModule } from './birds/birds.module';
+import { CatsModule } from './cats/cats.module';
+import { UsersModule } from './users/users.module';
+import { AddressModule } from './address/address.module';
 
 @Module({
   imports: [
@@ -28,6 +31,11 @@ import { AppService } from './app.service';
     }),
     UsersModule,
     CatsModule,
+    AddressModule,
+    MongooseModule.forRoot(
+      process.env.MANGODB_HOST || 'mongodb://localhost:27017/nestapp',
+    ),
+    // BirdsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -3,12 +3,14 @@ import {
   Controller,
   Delete,
   Get,
+  Inject,
   Param,
+  ParseIntPipe,
   Post,
   Put,
-  ParseIntPipe,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AddressService } from '../address/address.service';
 import { CreateUserDto } from './dto/user.post.req.dto';
 import { UpdateUserDto } from './dto/user.put.req.dto';
 import { FindUserDto } from './dto/user_find.post.req.dto';
@@ -18,6 +20,8 @@ import { UsersService } from './users.service';
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
+  @Inject(AddressService)
+  private readonly addressService: AddressService;
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
@@ -41,6 +45,16 @@ export class UsersController {
   @Get()
   findAll(): Promise<User[]> {
     return this.usersService.findAll();
+  }
+
+  @Get(':id/address')
+  async finduserIDAddr(@Param('id', ParseIntPipe) id: number): Promise<object> {
+    const user = await this.usersService.findOne(id);
+    const addr = await this.addressService.finduserIDAddr(id);
+    return {
+      user,
+      addr,
+    };
   }
 
   @Get(':id')

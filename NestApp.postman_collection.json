@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "bcefd63c-5c37-4ecf-bb75-b9ba1e52d9af",
+		"_postman_id": "caaccbfe-e840-40d3-a107-b00688027957",
 		"name": "NestApp",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -120,6 +120,332 @@
 							],
 							"path": [
 								"cats"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Birds",
+			"item": [
+				{
+					"name": "Bird Add",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\", \"createdOn\", \"modifiedOn\");",
+									"    var jsonReq = JSON.parse(pm.request.body);",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonReq.firstName).to.eql(jsonData.firstName);",
+									"    pm.expect(jsonReq.lastName).to.eql(jsonData.lastName);",
+									"    pm.expect(jsonReq.email).to.eql(jsonData.email);",
+									"    pm.expect(jsonData.isActive).to.eql(true);",
+									"    pm.environment.set(\"user_id\", jsonData.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomString(minValue, maxValue, dataSet = ",
+									"    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') {",
+									"        //0123456789",
+									"    if (!minValue) {",
+									"        minValue = 10;",
+									"        maxValue = 10;",
+									"    }",
+									"",
+									"    if (!maxValue) {",
+									"        maxValue = minValue;",
+									"    }",
+									"",
+									"    let length = _.random(minValue, maxValue),",
+									"        randomString = \"\";",
+									"",
+									"    for (let i = 0; i < length; i++)",
+									"        randomString += dataSet.charAt(Math.floor(Math.random() * dataSet.length));",
+									"    return randomString;",
+									"}",
+									"",
+									"pm.variables.set('randomString', randomString());",
+									"",
+									"pm.variables.set('randomNo', _.random(1, 50));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"{{randomString}}\",\n  \"breed\": \"breed {{randomString}}\",\n  \"age\": {{randomNo}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/birds",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"birds"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bird Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\");",
+									"    var jsonReq = JSON.parse(pm.request.body);",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonReq.firstName).to.eql(jsonData.firstName);",
+									"    pm.expect(jsonReq.lastName).to.eql(jsonData.lastName);",
+									"    pm.expect(jsonReq.email).to.eql(jsonData.email);",
+									"    pm.expect(jsonReq.isActive).to.eql(jsonData.isActive);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function randomString(minValue, maxValue, dataSet = ",
+									"    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') {",
+									"        //0123456789",
+									"    if (!minValue) {",
+									"        minValue = 10;",
+									"        maxValue = 10;",
+									"    }",
+									"",
+									"    if (!maxValue) {",
+									"        maxValue = minValue;",
+									"    }",
+									"",
+									"    let length = _.random(minValue, maxValue),",
+									"        randomString = \"\";",
+									"",
+									"    for (let i = 0; i < length; i++)",
+									"        randomString += dataSet.charAt(Math.floor(Math.random() * dataSet.length));",
+									"    return randomString;",
+									"}",
+									"",
+									"pm.variables.set('randomString', randomString());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 40,\n  \"firstName\": \"Niku\",\n  \"lastName\": \"Last{{randomString}}\",\n  \"email\": \"Last@gmail.com\",\n  \"isActive\" : false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/Birds",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Birds"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bird by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"birds",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/birds/2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"birds",
+								"2"
+							],
+							"query": [
+								{
+									"key": "fs",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bird All",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/Birds",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"Birds"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bird find",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"isActive\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/birds/find",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"birds",
+								"find"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bird Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/birds/{{user_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"birds",
+								"{{user_id}}"
+							],
+							"query": [
+								{
+									"key": "fs",
+									"value": null,
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -435,6 +761,271 @@
 							"path": [
 								"users",
 								"{{user_id}}"
+							],
+							"query": [
+								{
+									"key": "fs",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users by ID with Address",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/users/2/address",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"2",
+								"address"
+							],
+							"query": [
+								{
+									"key": "fs",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Address",
+			"item": [
+				{
+					"name": "Address Add",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\", \"createdOn\", \"modifiedOn\");",
+									"    var jsonReq = JSON.parse(pm.request.body);",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonReq.city).to.eql(jsonData.city);",
+									"    pm.expect(jsonData.isActive).to.eql(true);",
+									"    pm.environment.set(\"address_id\", jsonData.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user_id\": 11,\n  \"line1\": \"1 Square\",\n  \"line2\": \"My Road\",\n  \"city\": \"Pune\",\n  \"district\": \"Pune\",\n  \"state\": \"Goa\",\n  \"country\": \"India\"\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/address",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Address Update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"id\", \"createdOn\", \"modifiedOn\");",
+									"    var jsonReq = JSON.parse(pm.request.body);",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonReq.city).to.eql(jsonData.city);",
+									"    pm.expect(jsonData.isActive).to.eql(true);",
+									"    pm.environment.set(\"user_id\", jsonData.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 11,\n  \"user_id\": 11,\n  \"line1\": \"1 Square\",\n  \"line2\": \"My Road\",\n  \"city\": \"Pune\",\n  \"district\": \"Pune\",\n  \"state\": \"Goa\",\n  \"country\": \"India\"\n}"
+						},
+						"url": {
+							"raw": "{{baseURL}}/address",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Address by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/address/2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"address",
+								"2"
+							],
+							"query": [
+								{
+									"key": "fs",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Address All",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users Delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/users/{{address_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"users",
+								"{{address_id}}"
 							],
 							"query": [
 								{

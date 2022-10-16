@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
+import { AddressService } from '../address/address.service';
 import { Repository } from 'typeorm';
 
 const userArray = [
@@ -22,6 +23,7 @@ const oneUser = {
 
 describe('UserService', () => {
   let service: UsersService;
+  let userService: AddressService;
   let repository: Repository<User>;
 
   beforeEach(async () => {
@@ -38,6 +40,7 @@ describe('UserService', () => {
             delete: jest.fn(),
           },
         },
+        AddressService,
       ],
     }).compile();
 
@@ -60,6 +63,7 @@ describe('UserService', () => {
         service.create({
           firstName: 'firstName #1',
           lastName: 'lastName #1',
+          email: '',
         }),
       ).resolves.toEqual(oneUser);
     });
