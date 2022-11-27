@@ -9,6 +9,7 @@ import { BirdsModule } from './birds/birds.module';
 import { CatsModule } from './cats/cats.module';
 import { UsersModule } from './users/users.module';
 import { AddressModule } from './address/address.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { AddressModule } from './address/address.module';
       process.env.MANGODB_HOST || 'mongodb://localhost:27017/nestapp',
     ),
     BirdsModule,
+    EventsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
