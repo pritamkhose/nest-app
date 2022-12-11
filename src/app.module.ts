@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
+// import { TypeOrmModule } from '@nestjs/typeorm';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -17,7 +17,7 @@ import { EventsModule } from './events/events.module';
       envFilePath: '.env',
       // ignoreEnvFile: process.env.NODE_ENV === 'production',
     }),
-    TypeOrmModule.forRoot(
+    /* TypeOrmModule.forRoot(
       process.env.DB_TYPE === 'postgres'
         ? {
             type: 'postgres',
@@ -45,10 +45,10 @@ import { EventsModule } from './events/events.module';
             // entities: ['entity/*.js'],
             // logger: new MyCustomLogger(),
           },
-    ),
-    UsersModule,
+    ), */
+    // UsersModule,
     CatsModule,
-    AddressModule,
+    // AddressModule,
     MongooseModule.forRoot(
       process.env.MANGODB_HOST || 'mongodb://localhost:27017/nestapp',
     ),
