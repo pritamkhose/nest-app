@@ -4,8 +4,10 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ScheduleModule } from '@nestjs/schedule';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { TasksService } from './corn/task.service';
 
 import { AuthModule } from './auth/auth.module';
 import { BirdsModule } from './birds/birds.module';
@@ -49,6 +51,7 @@ import { EventsModule } from './events/events.module';
             // logger: new MyCustomLogger(),
           },
     ),
+    ScheduleModule.forRoot(),
     AuthModule,
     UsersModule,
     CatsModule,
@@ -62,6 +65,7 @@ import { EventsModule } from './events/events.module';
   controllers: [AppController],
   providers: [
     AppService,
+    TasksService,
     // {
     //   provide: APP_GUARD,
     //   useClass: RolesGuard,
