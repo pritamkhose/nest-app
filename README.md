@@ -79,6 +79,10 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - [Inject Service From Another Module in NestJS](https://blog.bitsrc.io/nest-js-inject-service-from-another-module-cf85987398d5)
 - [Nest JS Lifecycle](https://docs.nestjs.com/fundamentals/lifecycle-events)
 - [Nest Websocket](https://docs.nestjs.com/websockets/gateways) [code](https://github.com/nestjs/nest/blob/master/sample/02-gateways/src/events/events.gateway.ts) and it's tutorial [Youtube](https://www.youtube.com/watch?v=iObzX8-Y5xg)
+- [Nest Auth](https://docs.nestjs.com/security/authentication)
+- [Nest Auth Example](https://github.com/nestjs/nest/blob/master/sample/19-auth-jwt/)
+- [Password Regex](https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a)
+- [Swagger access token](https://stackoverflow.com/questions/54802832/is-it-possible-to-add-authentication-to-access-to-nestjs-swagger-explorer)
 
 - [NestJS Crash Course](https://www.youtube.com/playlist?list=PL_cUvD4qzbkw-phjGK2qq0nQiG6gw1cKK)
 - [Nest JS Advance Course ](https://www.youtube.com/watch?v=i1wN86rnMEI&list=PLIGDNOJWiL1_YrquGbDDN4BNNRy678Spr)

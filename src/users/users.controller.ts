@@ -9,7 +9,12 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { AddressService } from '../address/address.service';
 import { CreateUserDto } from './dto/user.post.req.dto';
 import { UpdateUserDto } from './dto/user.put.req.dto';
@@ -19,6 +24,7 @@ import { UsersService } from './users.service';
 
 @ApiTags('users')
 @Controller('users')
+@ApiBearerAuth('JWT-auth')
 export class UsersController {
   @Inject(AddressService)
   private readonly addressService: AddressService;

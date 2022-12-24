@@ -23,4 +23,14 @@ export class FindUserDto {
   })
   @Optional()
   isActive: boolean;
+
+  @ApiProperty({ example: 'username', description: 'The username of the user' })
+  username: string;
+
+  @ApiProperty({
+    example: 'password',
+    description:
+      'The password of the user where minimum eight characters, at least one uppercase letter, one lowercase letter and one number',
+  })
+  password: string;
 }

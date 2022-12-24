@@ -40,4 +40,20 @@ export class UpdateUserDto {
   })
   @IsBoolean()
   isActive: boolean;
+
+  @ApiProperty({ example: 'username', description: 'The username of the user' })
+  @IsString()
+  @Length(2, 50)
+  @Matches(/^[a-zA-Z]+$/)
+  username: string;
+
+  @ApiProperty({
+    example: 'password',
+    description:
+      'The password of the user where minimum eight characters, at least one uppercase letter, one lowercase letter and one number',
+  })
+  @IsString()
+  @Length(2, 50)
+  @Matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)
+  password: string;
 }

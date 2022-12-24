@@ -23,6 +23,12 @@ export class User {
   @Column({ width: 100 })
   email: string;
 
+  @Column({ width: 50 })
+  username: string;
+
+  @Column({ width: 50 })
+  password: string;
+
   @CreateDateColumn({
     nullable: false,
     name: 'dt_create',

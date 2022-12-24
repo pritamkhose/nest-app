@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "caaccbfe-e840-40d3-a107-b00688027957",
+		"_postman_id": "4e435df7-b669-4924-ba01-3253d7cc5892",
 		"name": "NestApp",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9250227"
 	},
 	"item": [
 		{
@@ -324,7 +325,7 @@
 							"query": [
 								{
 									"key": "fs",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -441,7 +442,7 @@
 							"query": [
 								{
 									"key": "fs",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -516,7 +517,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"firstName\": \"Prem\",\n  \"lastName\": \"Last {{randomString}}\",\n  \"email\": \"{{randomString}}@gmail.com\"\n}",
+							"raw": "{\n  \"firstName\": \"Prem\",\n  \"lastName\": \"Last {{randomString}}\",\n  \"email\": \"{{randomString}}@gmail.com\",\n  \"username\": \"User{{randomString}}\",\n  \"password\": \"Password@4\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -596,7 +597,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"id\": 40,\n  \"firstName\": \"Niku\",\n  \"lastName\": \"Last{{randomString}}\",\n  \"email\": \"Last@gmail.com\",\n  \"isActive\" : false\n}",
+							"raw": "{\n  \"id\": 40,\n  \"firstName\": \"Niku\",\n  \"lastName\": \"Last{{randomString}}\",\n  \"email\": \"Last@gmail.com\",\n  \"isActive\" : false,\n  \"username\": \"User{{randomString}}\",\n  \"password\": \"Password@4\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -646,7 +647,7 @@
 							"query": [
 								{
 									"key": "fs",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -674,6 +675,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -763,7 +774,7 @@
 							"query": [
 								{
 									"key": "fs",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -803,7 +814,7 @@
 							"query": [
 								{
 									"key": "fs",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -955,7 +966,7 @@
 							"query": [
 								{
 									"key": "fs",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -1028,9 +1039,119 @@
 							"query": [
 								{
 									"key": "fs",
-									"value": null,
+									"value": "",
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"date\", \"status\", \"access_token\");",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.status).to.eql(\"pass\");",
+									"    pm.environment.set(\"access_token\", jsonData.access_token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Prem\",\n    \"password\": \"Password@4\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auth profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/auth/profile",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Local profile profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/auth/localprofile",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"localprofile"
 							]
 						}
 					},
