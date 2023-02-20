@@ -87,9 +87,14 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - Nest JS [Helmet](https://docs.nestjs.com/security/helmet), [cors](https://docs.nestjs.com/security/cors)
 - Nest JS [corn job](https://docs.nestjs.com/techniques/task-scheduling)
 
+- [crypto-js](https://github.com/brix/crypto-js)
+
 
 - [NestJS Crash Course](https://www.youtube.com/playlist?list=PL_cUvD4qzbkw-phjGK2qq0nQiG6gw1cKK)
 - [Nest JS Advance Course ](https://www.youtube.com/watch?v=i1wN86rnMEI&list=PLIGDNOJWiL1_YrquGbDDN4BNNRy678Spr)
+
+- [NestJS Localization](https://medium.com/yavar/localization-of-nestjs-cee2eae50392)
+- [NestJS Quickstart](https://nestjs-i18n.com/quick-start)
 
 
 ## Stay in touch

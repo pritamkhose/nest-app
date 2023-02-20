@@ -16,11 +16,25 @@ import { UsersModule } from './users/users.module';
 import { AddressModule } from './address/address.module';
 import { EventsModule } from './events/events.module';
 
+import { AcceptLanguageResolver, I18nModule, QueryResolver } from 'nestjs-i18n';
+import * as path from 'path';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env',
       // ignoreEnvFile: process.env.NODE_ENV === 'production',
+    }),
+    I18nModule.forRoot({
+      fallbackLanguage: 'en',
+      loaderOptions: {
+        path: path.join(__dirname, '/i18n/'),
+        watch: true,
+      },
+      resolvers: [
+        { use: QueryResolver, options: ['lang'] },
+        AcceptLanguageResolver,
+      ],
     }),
     TypeOrmModule.forRoot(
       process.env.DB_TYPE === 'postgres'
