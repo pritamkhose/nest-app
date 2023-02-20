@@ -1160,6 +1160,151 @@
 			]
 		},
 		{
+			"name": "i18n",
+			"item": [
+				{
+					"name": "i18n en",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "us",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/i18n",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"i18n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "i18n nl",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "nl",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/i18n",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"i18n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "i18n mr",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "mr",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/i18n",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"i18n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "i18n hi",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "hi",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/i18n",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"i18n"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Home",
 			"event": [
 				{

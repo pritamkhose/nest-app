@@ -14,6 +14,7 @@ export class AppController {
       msg: i18n.t(`test.greet_hello`),
       date: new Date().toISOString(),
       lang,
+      test: i18n.t(`test`),
     };
   }
 
