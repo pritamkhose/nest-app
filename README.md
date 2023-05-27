@@ -59,6 +59,9 @@ $ npm run test:cov
 
 # run postman collection
 $ npm run postman
+
+# run postman collection
+$ npm run docs
 ```
 
 ## nest cli
@@ -95,6 +98,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 - [NestJS Localization](https://medium.com/yavar/localization-of-nestjs-cee2eae50392)
 - [NestJS Quickstart](https://nestjs-i18n.com/quick-start)
+- [compodoc](https://docs.nestjs.com/recipes/documentation)
 
 
 ## Stay in touch

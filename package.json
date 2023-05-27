@@ -20,7 +20,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "newmanClean": "rm -rf newman/ &&",
-    "postman": "newman run NestApp.postman_collection.json --env-var baseURL=http://localhost:3000 -r cli,json"
+    "postman": "newman run NestApp.postman_collection.json --env-var baseURL=http://localhost:3000 -r cli,json",
+    "docs": "npx @compodoc/compodoc -p tsconfig.json -s"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
@@ -54,6 +55,7 @@
     "typeorm": "^0.3.10"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.21",
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
