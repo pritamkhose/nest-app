@@ -98,7 +98,8 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 - [NestJS Localization](https://medium.com/yavar/localization-of-nestjs-cee2eae50392)
 - [NestJS Quickstart](https://nestjs-i18n.com/quick-start)
-- [compodoc](https://docs.nestjs.com/recipes/documentation)
+- [Compodoc](https://docs.nestjs.com/recipes/documentation)
+- [In-memory Cache](https://docs.nestjs.com/techniques/caching#in-memory-cache) [Github sample](https://github.com/nestjs/nest/tree/master/sample/20-cache/src) with [NestJs Testing with CACHE_MANAGER injected](https://stackoverflow.com/questions/70482273/nestjs-testing-with-cache-manager-injected)
 
 
 ## Stay in touch

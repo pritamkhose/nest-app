@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 // import { APP_GUARD } from '@nestjs/core';
-
+import { CacheModule, CacheInterceptor } from '@nestjs/cache-manager';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -75,6 +76,7 @@ import * as path from 'path';
     ),
     BirdsModule,
     EventsModule,
+    CacheModule.register({ isGlobal: true }),
   ],
   controllers: [AppController],
   providers: [
@@ -84,6 +86,10 @@ import * as path from 'path';
     //   provide: APP_GUARD,
     //   useClass: RolesGuard,
     // },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: CacheInterceptor,
+    },
   ],
 })
 export class AppModule {}
